@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Username</span>
+    </div>
+    <input type="text" class="form-control" placeholder="Username" [(ngModel)]="usernameInput">
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Password</span>
+    </div>
+    <input type="password" class="form-control" placeholder="Username" [(ngModel)]="passwordInput">
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" [disabled]="!canLogin" (click)="login()">Login</button>
+    </div>
+  </div>
+</div>
