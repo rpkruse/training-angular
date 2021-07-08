@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core-module/core.module';
 import { SharedModule } from './shared-module/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent, LoginComponent, SignUpComponent } from './components';
+import { RoomSelectionComponent } from './components/room-selection/room-selection.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    SignUpComponent,
+    RoomSelectionComponent
   ],
   imports: [
     BrowserModule,

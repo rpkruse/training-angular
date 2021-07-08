@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/core-module/services';
+import { LoginService } from 'src/app/services';
+import { Constants } from 'src/app/shared-module/constants/constants';
 import { User, UserLogin } from 'src/app/shared-module/models/user';
-import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   usernameInput: string = '';
   passwordInput: string = '';
 
-  constructor(private loginService: LoginService, private toaster: ToasterService) { }
+  constructor(private loginService: LoginService, private toaster: ToasterService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
       (user: User) => console.log('I GOT THIS USER!!!', user),
-      (err) => this.handleError(err.error.Error[0])
+      (err) => this.handleError(err.error.Error[0]),
+      ()=>this.router.navigate([Constants.uiRoutes.room])
     );
   }
 
