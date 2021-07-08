@@ -1,6 +1,8 @@
 export class Constants {
   static uiRoutes = {
-    empty: '',
-    login: 'login'
+    home: 'home',
+    login: 'login',
+    signup: 'signup',
+    room: 'room'
   }
 }
