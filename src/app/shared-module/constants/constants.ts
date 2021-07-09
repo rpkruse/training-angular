@@ -3,6 +3,7 @@ export class Constants {
     home: 'home',
     login: 'login',
     signup: 'signup',
-    room: 'room'
+    room: 'roomselection',
+    board: 'room'
   }
 }
