@@ -16,4 +16,9 @@ export class LoginService {
   postLoginAttempt(userLogin: UserLogin): Observable<User> {
     return this.http.post(`${this._baseUrl}/login`, userLogin) as Observable<User>;
   }
+
+  postLoginCreation(userLogin: UserLogin): Observable<User> {
+    return this.http.post(this._baseUrl, userLogin) as Observable<User>;
+  }
+
 }
