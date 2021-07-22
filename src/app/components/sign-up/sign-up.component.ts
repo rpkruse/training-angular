@@ -39,7 +39,15 @@ export class SignUpComponent implements OnInit {
     this.toaster.showError(message);
   }
 
-  canSignUp(): boolean {
-    return this.passwordInput === this.passwordReEnter && this.passwordInput.length > 0;
+  get canSignUp(): Boolean {
+    return this.passwordLongEnough && this.passwordsMatch;
+    // return this.passwordInput === this.passwordReEnter && this.passwordInput.length > 0;
+  }
+
+  get passwordLongEnough(): Boolean{
+    return this.passwordInput.length > 5;
+  }
+  get passwordsMatch(): Boolean {
+    return this.passwordInput === this.passwordReEnter;
   }
 }

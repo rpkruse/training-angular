@@ -7,14 +7,14 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core-module/core.module';
 import { SharedModule } from './shared-module/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent, LoginComponent, SignUpComponent } from './components';
+import { LoginComponent, SignUpComponent } from './components';
 import { RoomSelectionComponent } from './components/room-selection/room-selection.component';
 import { RoomComponent } from './components/room/room.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
     SignUpComponent,
     RoomSelectionComponent,
@@ -26,9 +26,11 @@ import { RoomComponent } from './components/room/room.component';
     CoreModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

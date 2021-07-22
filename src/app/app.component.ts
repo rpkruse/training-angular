@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'training-angular';
+  logout():void{
+    sessionStorage.removeItem("user");
+  }
 }

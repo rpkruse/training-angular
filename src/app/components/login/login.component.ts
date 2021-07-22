@@ -1,9 +1,12 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/core-module/services';
 import { LoginService } from 'src/app/services';
 import { Constants } from 'src/app/shared-module/constants/constants';
 import { User, UserLogin } from 'src/app/shared-module/models/user';
+
+
 
 @Component({
   selector: 'app-login',
@@ -29,10 +32,11 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
-      (user: User) => console.log('I GOT THIS USER!!!', user),
+      (user: User) => sessionStorage.setItem("user",stringify(user.userID)),
       (err) => this.handleError(err.error.Error[0]),
       ()=>this.router.navigate([Constants.uiRoutes.room])
     );
+
   }
 
   get canLogin(): boolean {
