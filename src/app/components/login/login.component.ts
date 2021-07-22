@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
-      (user: User) => sessionStorage.setItem("user",stringify(user.userID)),
+      (user: User) => sessionStorage.setItem("user",JSON.stringify(user)),
       (err) => this.handleError(err.error.Error[0]),
       ()=>this.router.navigate([Constants.uiRoutes.room])
     );

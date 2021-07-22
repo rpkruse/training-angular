@@ -20,6 +20,7 @@ export interface writePost{
   message: string;
   rating: number;
   createdBy: number;
+  createdDate: Date;
 }
 
 

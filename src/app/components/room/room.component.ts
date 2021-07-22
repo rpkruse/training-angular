@@ -50,7 +50,8 @@ export class RoomComponent implements OnInit {
       const post: writePost = {
       message: this.messageInput,
       rating: 0,
-      createdBy: this.UserFromSessionStorage
+      createdBy: this.UserFromSessionStorage,
+      createdDate: new Date()
       }
       this.loginService.addPost(post).subscribe(
         (post:readPost)=>this.posts.push(post),
@@ -62,7 +63,7 @@ export class RoomComponent implements OnInit {
   }
 
   get UserFromSessionStorage(): number{
-    return Number(sessionStorage.getItem("user"));
+    return JSON.parse(sessionStorage.getItem("user")).userID;
   }
 
   deletePost(postID: number, index:number):void {
@@ -82,11 +83,17 @@ export class RoomComponent implements OnInit {
     return this.messageInput.trim().length != 0;
   }
 
-  get postsLength(): number{
-    return this.posts.length;
-  }
 
-  // saveLogin(): void {
-  //   sessionStorage.setItem("user", )
-  // }
+  timePosted(postedDate: Date):string {
+    let date = new Date(postedDate);
+    let currentDate = new Date();
+
+
+    let days = Math.floor((currentDate.getTime() - date.getTime()) / 1000 / 60 / 60 / 24) * -1;
+    if(days == 1){
+      return `${days} day ago`
+    }
+    return `${days} days ago`
+
+  }
 }
