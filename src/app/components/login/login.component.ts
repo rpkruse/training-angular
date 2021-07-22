@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/core-module/services';
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
-      (user: User) => sessionStorage.setItem("user",JSON.stringify(user)),
+      (user: User) => sessionStorage.setItem(Constants.session.user,JSON.stringify(user)),
       (err) => this.handleError(err.error.Error[0]),
       ()=>this.router.navigate([Constants.uiRoutes.room])
     );

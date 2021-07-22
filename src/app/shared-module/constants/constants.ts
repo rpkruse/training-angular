@@ -5,7 +5,7 @@ export class Constants {
     room: 'roomselection',
     board: 'room'
   }
-  // static session = {
-
-  // }
+  static session = {
+    user: 'user'
+  }
 }

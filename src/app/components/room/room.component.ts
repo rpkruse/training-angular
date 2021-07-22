@@ -63,7 +63,7 @@ export class RoomComponent implements OnInit {
   }
 
   get UserFromSessionStorage(): number{
-    return JSON.parse(sessionStorage.getItem("user")).userID;
+    return JSON.parse(sessionStorage.getItem(Constants.session.user)).userID;
   }
 
   deletePost(postID: number, index:number):void {

@@ -1,33 +1,3 @@
-<!-- <button (click)="getPosts()">click me</button> -->
-<!-- <button (click)="getUser(1)">click me</button> -->
-
-
-<!-- <h1 style="margin-bottom: 50px;">Posts</h1>
-
-
-<div *ngFor="let post of posts; let i = index" style="margin-bottom:20px;">
-  <h2>{{post.user.username}}</h2>
-  <h3>{{post.message}}</h3>
-  <button (click)="deletePost(post.postID,i)" >delete Post</button>
-</div>
-
-<div class="container">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Message</span>
-    </div>
-    <input type="text" class="form-control" [(ngModel)]="messageInput">
-  </div>
-
-
-  <div class="row">
-    <div class="col-12">
-      <button type="button" class="btn btn-primary" [disabled]="!canPost" (click)="postPost()">Post</button>
-    </div>
-  </div>
-</div> -->
-
-
 <!-- Section: Blog v.1 -->
 <section class="my-5" *ngIf="posts && posts.length > 0">
 
@@ -37,12 +7,6 @@
   <p class="text-center w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in voluptate velit
     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
     qui officia deserunt mollit anim id est laborum.</p>
-
-
-
-
-
-
 
     <div *ngFor="let post of posts; let i = index" style="margin-bottom:20px;">
 
@@ -81,9 +45,6 @@
         </div>
       </div>
           <ng-template #rightBlock>
-
-
-            <!-- Grid row -->
 
             <hr class="my-5">
 
@@ -131,17 +92,10 @@
           </ng-template>
     </div>
 
-
-
-
-
-
 <!-- Section: Blog v.1 -->
 
 <div *ngIf="posts.length % 2 == 0; else postRight">
   <hr class="my-5">
-
-
 
   <!-- Grid row -->
   <div class="row">
@@ -164,9 +118,6 @@
     <div class="col-lg-7">
 
       <!-- Category -->
-      <!-- <a href="" class="green-text">
-        <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food</h6>
-      </a> -->
       <div class="dropdown" mdbDropdown>
 
         <button mdbDropdownToggle mdbBtn color="success" class="dropdown-toggle waves-light" type="button"
@@ -185,13 +136,11 @@
 
 
       <!-- Post title -->
-      <!-- <input type="text" class="font-weight-bold mb-3" placeholder="Title of the news"> -->
       <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
         <input id="form-lg" class="form-control form-control-lg" type="text" mdbInput>
         <label for="form-lg">Title</label>
       </div>
 
-      <!-- <h3 class="font-weight-bold mb-3"><strong>Title of the news</strong></h3> -->
       <!-- Excerpt -->
       <p></p>
 
@@ -226,12 +175,6 @@
               <div class="col-lg-7">
 
                 <!-- Category -->
-                <!-- <a href="#!" class="pink-text">
-                  <h6 class="font-weight-bold mb-3"><mdb-icon far icon="image" class="pr-2"></mdb-icon>Lifestyle</h6>
-                </a> -->
-                <!-- Post title -->
-                <!-- <h3 class="font-weight-bold mb-3"><strong>Title of the news</strong></h3> -->
-                <!-- Excerpt -->
                 <div class="dropdown" mdbDropdown>
 
                   <button mdbDropdownToggle mdbBtn color="pink" class="dropdown-toggle waves-light" type="button"
@@ -263,8 +206,6 @@
                         <!-- <a href="" class="green-text">
           <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food</h6>
         </a> -->
-
-                <!-- <a mdbBtn color="pink" mdbWavesEffect class="mb-lg-0 mb-4" (click)="deletePost(post.postID,i)" >Read more</a> -->
 
               </div>
               <!-- Grid column -->
