@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent, LoginComponent, RoomSelectionComponent, SignUpComponent } from './components';
+import { LoginComponent, RoomSelectionComponent, SignUpComponent } from './components';
 import { RoomComponent } from './components/room/room.component';
 import { Constants } from './shared-module/constants/constants';
 
 
 const routes: Routes = [
-  {
-    path: Constants.uiRoutes.home,
-    component: HomeComponent
-  },
+
   {
     path: Constants.uiRoutes.login,
     component: LoginComponent,
@@ -28,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: Constants.uiRoutes.home,
+    redirectTo: Constants.uiRoutes.login,
   }
 
 ];

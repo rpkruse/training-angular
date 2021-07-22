@@ -5,6 +5,8 @@ import { LoginService } from 'src/app/services';
 import { Constants } from 'src/app/shared-module/constants/constants';
 import { User, UserLogin } from 'src/app/shared-module/models/user';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,10 +31,11 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
-      (user: User) => console.log('I GOT THIS USER!!!', user),
+      (user: User) => sessionStorage.setItem(Constants.session.user,JSON.stringify(user)),
       (err) => this.handleError(err.error.Error[0]),
       ()=>this.router.navigate([Constants.uiRoutes.room])
     );
+
   }
 
   get canLogin(): boolean {
