@@ -1,37 +1,71 @@
 <!-- Default form register -->
 <form class="text-center border border-light p-5">
-
   <p class="h4 mb-4">Sign up</p>
 
-
-
   <!-- E-mail -->
-  <input type="text" [ngModelOptions]="{standalone: true}" class="form-control mb-4" placeholder="Username" [(ngModel)]="usernameInput">
+  <input
+    type="text"
+    [ngModelOptions]="{ standalone: true }"
+    class="form-control mb-4"
+    placeholder="Username"
+    [(ngModel)]="usernameInput"
+  />
 
   <!-- Password -->
-  <input type="password" [ngModelOptions]="{standalone: true}" id="defaultRegisterFormPassword"  [(ngModel)]="passwordInput" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-  <small *ngIf="!passwordLongEnough; else elseBlock" id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+  <input
+    type="password"
+    [ngModelOptions]="{ standalone: true }"
+    id="defaultRegisterFormPassword"
+    [(ngModel)]="passwordInput"
+    class="form-control"
+    placeholder="Password"
+    aria-describedby="defaultRegisterFormPasswordHelpBlock"
+  />
+  <small
+    *ngIf="!passwordLongEnough; else elseBlock"
+    id="defaultRegisterFormPasswordHelpBlock"
+    class="form-text text-muted mb-4"
+  >
     At least 6 characters
   </small>
   <ng-template #elseBlock>
     <small class="form-text text-muted mb-4">Long Enough &#x2713;</small>
   </ng-template>
 
-    <!-- Password -->
-    <input type="password"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="passwordReEnter" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-    <small *ngIf="!passwordsMatch; else elseBlockk" id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-      Passwords must match
-    </small>
-    <ng-template #elseBlockk>
-      <small class="form-text text-muted mb-4">Passwords match &#x2713;</small>
-    </ng-template>
+  <!-- Password -->
+  <input
+    type="password"
+    [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="passwordReEnter"
+    class="form-control"
+    placeholder="Password"
+    aria-describedby="defaultRegisterFormPasswordHelpBlock"
+  />
+  <small
+    *ngIf="!passwordsMatch; else elseBlockk"
+    id="defaultRegisterFormPasswordHelpBlock"
+    class="form-text text-muted mb-4"
+  >
+    Passwords must match
+  </small>
+  <ng-template #elseBlockk>
+    <small class="form-text text-muted mb-4">Passwords match &#x2713;</small>
+  </ng-template>
 
-
-
-    <!-- id="defaultRegisterFormEmail"  id="defaultRegisterFormPassword   id="defaultRegisterFormPassword"-->
+  <!-- id="defaultRegisterFormEmail"  id="defaultRegisterFormPassword   id="defaultRegisterFormPassword"-->
 
   <!-- Sign up button -->
-  <button mdbBtn color="info"  [disabled]="!canSignUp" (click)="createLogin()" block="true" class="my-4" type="submit">Sign up</button>
+  <button
+    mdbBtn
+    color="info"
+    [disabled]="!canSignUp"
+    (click)="createLogin()"
+    block="true"
+    class="my-4"
+    type="submit"
+  >
+    Sign up
+  </button>
 
   <!-- Social register -->
   <p>or sign up with:</p>
@@ -49,13 +83,11 @@
     <mdb-icon fab icon="github"></mdb-icon>
   </a>
 
-  <hr>
+  <hr />
 
   <!-- Terms of service -->
-  <p>By clicking
-    <em>Sign up</em> you agree to our
-    <a href="" target="_blank">terms of service</a></p>
-
+  <p>
+    By clicking <em>Sign up</em> you agree to our
+    <a href="" target="_blank">terms of service</a>
+  </p>
 </form>
-
-
