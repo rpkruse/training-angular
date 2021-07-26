@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Constants } from './shared-module/constants/constants';
 
 @Component({
@@ -6,9 +7,22 @@ import { Constants } from './shared-module/constants/constants';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  currentRoute: string
+  constructor(private router: Router){}
+  ngOnInit():void{
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd){
+      this.currentRoute = val.url;
+   }});
+  }
+  get showNavbar(): boolean{
+    return this.currentRoute !== `/${Constants.uiRoutes.login}` && this.currentRoute !== `/${Constants.uiRoutes.signup}`;
+  }
   title = 'training-angular';
   logout():void{
     sessionStorage.removeItem(Constants.session.user);
+    localStorage.removeItem(Constants.session.user)
   }
 }
+

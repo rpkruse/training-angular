@@ -13,13 +13,18 @@ import { User, UserLogin } from 'src/app/shared-module/models/user';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  isChecked: boolean = false;
 
   usernameInput: string = '';
   passwordInput: string = '';
 
   constructor(private loginService: LoginService, private toaster: ToasterService, private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.loginService.loggedIn() !== "none"){
+      this.router.navigate([Constants.uiRoutes.room]);
+    }
+   }
 
   /*
     TODO: Try to do the form stuff with angular reactive forms
@@ -31,11 +36,16 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginService.postLoginAttempt(userLogin).subscribe(
-      (user: User) => sessionStorage.setItem(Constants.session.user,JSON.stringify(user)),
+      (user: User) => {
+        if (this.isChecked){
+          localStorage.setItem(Constants.session.user,JSON.stringify(user))
+        } else {
+          sessionStorage.setItem(Constants.session.user,JSON.stringify(user))
+        }
+      },
       (err) => this.handleError(err.error.Error[0]),
       ()=>this.router.navigate([Constants.uiRoutes.room])
     );
-
   }
 
   get canLogin(): boolean {

@@ -1,5 +1,6 @@
 <!-- Section: Blog v.1 -->
-<section class="my-5" *ngIf="posts && posts.length > 0">
+<section class="my-5">
+  <!-- *ngIf="posts && posts.length > 0" -->
   <!-- Section heading -->
   <h2 class="h1-responsive font-weight-bold text-center my-5">Posts</h2>
   <!-- Section description -->
@@ -21,11 +22,7 @@
             class="view overlay rounded z-depth-2 mb-lg-0 mb-4 waves-light"
             mdbWavesEffect
           >
-            <img
-              class="img-fluid"
-              src="https://mdbootstrap.com/img/Photos/Others/img%20(27).jpg"
-              alt="Sample image"
-            />
+            <img class="img-fluid" src="{{ post.image }}" alt="Sample image" />
             <a>
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -42,7 +39,7 @@
           </a>
           <!-- Post title -->
           <h3 class="font-weight-bold mb-3">
-            <strong>Title of the news</strong>
+            <strong>{{ post.title }}</strong>
           </h3>
           <!-- Excerpt -->
           <p>{{ post.message }}</p>
@@ -53,17 +50,26 @@
               ><strong>{{ post.user.username }}</strong></a
             >, {{ timePosted(post.createdDate) }}
           </p>
+
           <!-- Read more button -->
-          <a mdbBtn color="success" mdbWavesEffect
-            ><i class="fas fa-arrow-up"></i
-          ></a>
-          <a
-            mdbBtn
-            color="success"
-            (click)="deletePost(post.postID, i)"
-            mdbWavesEffect
-            ><i class="fas fa-arrow-down"></i
-          ></a>
+          <h3 class="font-weight-bold mb-3">
+            <strong>{{ post.rating }}</strong>
+            <a mdbBtn color="success" (click)="upvote(i)"mdbWavesEffect
+              ><i class="fas fa-arrow-up"></i
+            ></a>
+            <a mdbBtn color="success" (click)="downvote(i)"mdbWavesEffect
+              ><i class="fas fa-arrow-down"></i
+            ></a>
+            <a
+              mdbBtn
+              color="success"
+              (click)="deletePost(post.postID, i)"
+              mdbWavesEffect
+            >
+              Delete
+            </a>
+            <a mdbBtn color="success" (click)="update()" mdbWavesEffect> Update </a>
+          </h3>
         </div>
         <!-- Grid column -->
       </div>
@@ -83,7 +89,7 @@
           </a>
           <!-- Post title -->
           <h3 class="font-weight-bold mb-3">
-            <strong>Title of the news</strong>
+            <strong>{{ post.title }}</strong>
           </h3>
           <!-- Excerpt -->
           <p>{{ post.message }}</p>
@@ -95,16 +101,26 @@
             >, {{ timePosted(post.createdDate) }}
           </p>
           <!-- Read more button -->
-          <a mdbBtn color="pink" mdbWavesEffect
-            ><i class="fas fa-arrow-up"></i
-          ></a>
-          <a
-            mdbBtn
-            color="pink"
-            (click)="deletePost(post.postID, i)"
-            mdbWavesEffect
-            ><i class="fas fa-arrow-down"></i
-          ></a>
+          <h3 class="font-weight-bold mb-3">
+            <strong>{{ post.rating }}</strong>
+
+            <a mdbBtn color="pink" (click)="upvote(i)"mdbWavesEffect
+              ><i class="fas fa-arrow-up"></i
+            ></a>
+            <a mdbBtn color="pink" (click)="downvote(i)"mdbWavesEffect
+              ><i class="fas fa-arrow-down"></i
+            ></a>
+            <a
+              mdbBtn
+              color="pink"
+              (click)="deletePost(post.postID, i)"
+              mdbWavesEffect
+            >
+              Delete
+            </a>
+            <a mdbBtn color="pink" (click)="update()" mdbWavesEffect> update </a>
+          </h3>
+
           <!-- <a mdbBtn color="pink" mdbWavesEffect class="mb-lg-0 mb-4" (click)="deletePost(post.postID,i)" >Read more</a> -->
         </div>
         <!-- Grid column -->
@@ -118,8 +134,8 @@
           >
             <img
               class="img-fluid"
-              src="https://mdbootstrap.com/img/Photos/Others/img%20(34).jpg"
-              alt="Sample image"
+              src="{{ post.image }}"
+              alt="Ayo this image is broken"
             />
             <a>
               <div class="mask rgba-white-slight"></div>
@@ -139,28 +155,64 @@
 
     <!-- Grid row -->
     <div class="row">
-      <!-- Grid column -->
       <div class="col-lg-5">
-        <!-- Featured image -->
-        <div
-          class="view overlay rounded z-depth-2 mb-lg-0 mb-4 waves-light"
-          mdbWavesEffect
-        >
+        <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
           <img
             class="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Others/img%20(27).jpg"
+            src="https://cdn.discordapp.com/attachments/168572195075915776/858518609424154654/masters.PNG"
             alt="Sample image"
           />
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
         </div>
+
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            name="imagePink"
+            id="imagePink"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="imageInput"
+            mdbInput
+          />
+          <label for="imagePink">Image URL</label>
+        </div>
       </div>
-      <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="col-lg-7">
         <!-- Category -->
+        <h3 class="font-weight-bold mb-3">
+          <strong>Create Post</strong>
+        </h3>
+        <!-- Post title -->
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            id="form-lg"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="titleInput"
+            mdbInput
+          />
+          <label for="form-lg">Title</label>
+        </div>
+
+        <!-- Excerpt -->
+        <p></p>
+
+        <div class="md-form md-outline green-text">
+          <textarea
+            type="text"
+            id="form75"
+            class="form-control mb-3 md-textarea"
+            rows="2.5"
+            [(ngModel)]="messageInput"
+            mdbInput
+          ></textarea>
+          <label for="form75">Message</label>
+        </div>
+
         <div class="dropdown" mdbDropdown>
           <button
             mdbDropdownToggle
@@ -190,32 +242,6 @@
           </div>
         </div>
 
-        <!-- Post title -->
-        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
-          <input
-            id="form-lg"
-            class="form-control form-control-lg"
-            type="text"
-            mdbInput
-          />
-          <label for="form-lg">Title</label>
-        </div>
-
-        <!-- Excerpt -->
-        <p></p>
-
-        <div class="md-form md-outline green-text">
-          <textarea
-            type="text"
-            id="form75"
-            class="form-control mb-3 md-textarea"
-            rows="3"
-            [(ngModel)]="messageInput"
-            mdbInput
-          ></textarea>
-          <label for="form75">Message</label>
-        </div>
-
         <!-- <input type="text" class="mb-3" placeholder="message"> -->
         <!-- <p>message</p> -->
         <!-- Post data -->
@@ -235,7 +261,41 @@
     <div class="row">
       <!-- Grid column -->
       <div class="col-lg-7">
+        <h3 class="font-weight-bold mb-3">
+          <strong>Create Post</strong>
+        </h3>
         <!-- Category -->
+
+        <div
+          class="md-form md-outline form-lg font-weight-bold green-text mb-3"
+        >
+          <input
+            id="form-lg"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="titleInput"
+            mdbInput
+          />
+          <label for="form-lg">Title</label>
+        </div>
+
+        <div class="md-form md-outline pink-text">
+          <textarea
+            type="text"
+            id="form75"
+            class="form-control mb-3 md-textarea"
+            rows="2.5"
+            [(ngModel)]="messageInput"
+            mdbInput
+          ></textarea>
+          <label for="form75">Message</label>
+        </div>
+        <!-- Post data -->
+        <!-- <p>by <a><strong>{{post.user.username}}</strong></a>, 14/08/2018</p> -->
+        <!-- Read more button -->
+        <!-- <a href="" class="green-text">
+          <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food</h6>
+        </a> -->
         <div class="dropdown" mdbDropdown>
           <button
             mdbDropdownToggle
@@ -264,53 +324,36 @@
             </button>
           </div>
         </div>
-
-        <div
-          class="md-form md-outline form-lg font-weight-bold green-text mb-3"
-        >
-          <input
-            id="form-lg"
-            class="form-control form-control-lg"
-            type="text"
-            mdbInput
-          />
-          <label for="form-lg">Title</label>
-        </div>
-
-        <div class="md-form md-outline pink-text">
-          <textarea
-            type="text"
-            id="form75"
-            class="form-control mb-3 md-textarea"
-            rows="3"
-            [(ngModel)]="messageInput"
-            mdbInput
-          ></textarea>
-          <label for="form75">Message</label>
-        </div>
-        <!-- Post data -->
-        <!-- <p>by <a><strong>{{post.user.username}}</strong></a>, 14/08/2018</p> -->
-        <!-- Read more button -->
-        <!-- <a href="" class="green-text">
-          <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food</h6>
-        </a> -->
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
+
       <div class="col-lg-5">
-        <!-- Featured image -->
         <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
           <img
             class="img-fluid"
-            src="https://mdbootstrap.com/img/Photos/Others/img%20(34).jpg"
+            src="https://cdn.discordapp.com/attachments/168572195075915776/858518609424154654/masters.PNG"
             alt="Sample image"
           />
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
         </div>
+
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            name="imagePink"
+            id="imagePink"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="imageInput"
+            mdbInput
+          />
+          <label for="imagePink">Image URL</label>
+        </div>
       </div>
+
       <!-- Grid column -->
     </div>
     <!-- Grid row -->

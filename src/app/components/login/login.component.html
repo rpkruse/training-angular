@@ -17,10 +17,15 @@
   />
   <div class="d-flex justify-content-around">
     <div>
-      <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+      <mdb-checkbox
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="isChecked"
+        [default]="true"
+        >Remember me</mdb-checkbox
+      >
     </div>
     <div>
-      <a href="">Forgot password?</a>
+      <a>Forgot password?</a>
     </div>
   </div>
   <button
@@ -36,7 +41,7 @@
   </button>
   <p>
     Not a member?
-    <a href="">Register</a>
+    <a [routerLink]="['/signup']">Register</a>
   </p>
   <p>or sign in with:</p>
   <a type="button" class="light-blue-text mx-2">
