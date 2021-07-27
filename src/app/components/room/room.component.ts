@@ -17,6 +17,7 @@ export class RoomComponent implements OnInit {
   posts: readPost[] = [];
   titleInput: string = "";
   imageInput: string = "";
+  categoryInput: string = "Category";
 
   constructor(private loginService: LoginService, private toaster: ToasterService, private router: Router) {
     this.getPosts();
@@ -34,6 +35,17 @@ export class RoomComponent implements OnInit {
     );
   }
 
+  isCurrentUser(index: number):boolean{
+    let log = this.loginService.loggedIn();
+
+    if(log == 'session'){
+      return this.posts[index].user.userID === JSON.parse(sessionStorage.getItem(Constants.session.user)).userID
+    } else if (log == 'local'){
+      return this.posts[index].user.userID === JSON.parse(localStorage.getItem(Constants.session.user)).userID
+    }
+    return false;
+  }
+
   getUser(userID:number): void{
     this.loginService.getUserForPost(userID).subscribe(
       (user:User)=>console.log(user),
@@ -48,9 +60,6 @@ export class RoomComponent implements OnInit {
 
   }
 
-  // get listLength():number {
-  //   return this.length;
-  // }
 
   postPost(): void{
     if(this.canPost){
@@ -105,7 +114,7 @@ export class RoomComponent implements OnInit {
   }
 
   get canPost(): boolean {
-    return this.messageInput.trim().length != 0 && this.titleInput.trim().length != 0;
+    return this.messageInput.trim().length != 0 && this.titleInput.trim().length != 0 && this.categoryInput != "Category";
   }
 
 
@@ -126,11 +135,14 @@ export class RoomComponent implements OnInit {
       ()=>{},
       (err) => this.handleError(err.error.Error[0])
     );
-    while(this.posts[index - 1].rating < this.posts[index].rating){
-      let temp = this.posts[index - 1];
-      this.posts[index - 1] = this.posts[index];
-      this.posts[index] = temp;
-      index -= 1;
+    if(index != 0){
+
+      while(this.posts[index - 1].rating < this.posts[index].rating){
+        let temp = this.posts[index - 1];
+        this.posts[index - 1] = this.posts[index];
+        this.posts[index] = temp;
+        index -= 1;
+      }
     }
 
   }
@@ -140,15 +152,25 @@ export class RoomComponent implements OnInit {
       ()=>{},
       (err) => this.handleError(err.error.Error[0])
     );
-    while(this.posts[index + 1].rating > this.posts[index].rating){
-      let temp = this.posts[index + 1];
-      this.posts[index + 1] = this.posts[index];
-      this.posts[index] = temp;
-      index += 1;
+    if(index != this.posts.length - 1){
+      while(this.posts[index + 1].rating > this.posts[index].rating){
+        let temp = this.posts[index + 1];
+        this.posts[index + 1] = this.posts[index];
+        this.posts[index] = temp;
+        index += 1;
+      }
+
     }
 
   }
-  update(): void{
+  update(index: number): void{
+    this.loginService.updatePost(this.posts[index]).subscribe(
+      ()=>{},
+      (err) => this.handleError(err.error.Error[0])
+    );
+  }
 
+  setCategory(category: string): void {
+    this.categoryInput = category;
   }
 }

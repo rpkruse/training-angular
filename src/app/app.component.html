@@ -68,9 +68,19 @@
 
 
 
+
+
+
     </div>
           <!-- Icons -->
       <ul class="navbar-nav d-flex flex-row me-1">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" >{{userFromStorage}}</a>
+            </li>
+          </ul>
+        </div>
         <li class="nav-item me-3 me-lg-0">
           <a class="nav-link" (click)="logout()" [routerLink]="['/login']"><i class="fas fa-sign-out-alt"></i></a>
         </li>

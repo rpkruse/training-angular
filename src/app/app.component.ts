@@ -24,5 +24,14 @@ export class AppComponent implements OnInit {
     sessionStorage.removeItem(Constants.session.user);
     localStorage.removeItem(Constants.session.user)
   }
+
+  get userFromStorage():string{
+    if(!!sessionStorage.getItem(Constants.session.user)){
+      return JSON.parse(sessionStorage.getItem(Constants.session.user)).username
+    } else if (!!localStorage.getItem(Constants.session.user)){
+      return JSON.parse(localStorage.getItem(Constants.session.user)).username
+    }
+    return ""
+  }
 }
 

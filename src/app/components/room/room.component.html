@@ -32,7 +32,7 @@
         <!-- Grid column -->
         <div class="col-lg-7">
           <!-- Category -->
-          <a href="#!" class="green-text">
+          <a  class="green-text">
             <h6 class="font-weight-bold mb-3">
               <mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food
             </h6>
@@ -54,21 +54,24 @@
           <!-- Read more button -->
           <h3 class="font-weight-bold mb-3">
             <strong>{{ post.rating }}</strong>
-            <a mdbBtn color="success" (click)="upvote(i)"mdbWavesEffect
+            <button mdbBtn color="success" (click)="upvote(i)"mdbWavesEffect
               ><i class="fas fa-arrow-up"></i
-            ></a>
-            <a mdbBtn color="success" (click)="downvote(i)"mdbWavesEffect
+            ></button>
+            <button mdbBtn color="success" (click)="downvote(i)"mdbWavesEffect
               ><i class="fas fa-arrow-down"></i
-            ></a>
-            <a
+            ></button>
+            <span *ngIf="isCurrentUser(i)">
+              <button
               mdbBtn
               color="success"
               (click)="deletePost(post.postID, i)"
               mdbWavesEffect
             >
               Delete
-            </a>
-            <a mdbBtn color="success" (click)="update()" mdbWavesEffect> Update </a>
+              </button>
+            <button mdbBtn color="success" (click)="update(i)" mdbWavesEffect> Update </button>
+            </span>
+
           </h3>
         </div>
         <!-- Grid column -->
@@ -82,7 +85,7 @@
         <!-- Grid column -->
         <div class="col-lg-7">
           <!-- Category -->
-          <a href="#!" class="pink-text">
+          <a  class="pink-text">
             <h6 class="font-weight-bold mb-3">
               <mdb-icon far icon="image" class="pr-2"></mdb-icon>Lifestyle
             </h6>
@@ -104,21 +107,24 @@
           <h3 class="font-weight-bold mb-3">
             <strong>{{ post.rating }}</strong>
 
-            <a mdbBtn color="pink" (click)="upvote(i)"mdbWavesEffect
+            <button mdbBtn color="pink" (click)="upvote(i)"mdbWavesEffect
               ><i class="fas fa-arrow-up"></i
-            ></a>
-            <a mdbBtn color="pink" (click)="downvote(i)"mdbWavesEffect
+            ></button>
+            <button mdbBtn color="pink" (click)="downvote(i)"mdbWavesEffect
               ><i class="fas fa-arrow-down"></i
-            ></a>
-            <a
+            ></button>
+            <span *ngIf="isCurrentUser(i)">
+              <button
               mdbBtn
               color="pink"
               (click)="deletePost(post.postID, i)"
               mdbWavesEffect
             >
               Delete
-            </a>
-            <a mdbBtn color="pink" (click)="update()" mdbWavesEffect> update </a>
+              </button>
+            <button mdbBtn color="pink" (click)="update(i)" mdbWavesEffect> update </button>
+            </span>
+
           </h3>
 
           <!-- <a mdbBtn color="pink" mdbWavesEffect class="mb-lg-0 mb-4" (click)="deletePost(post.postID,i)" >Read more</a> -->
@@ -224,7 +230,7 @@
           >
             Category
           </button>
-          <a mdbBtn color="success" mdbWavesEffect (click)="postPost()">Post</a>
+          <button [disabled]="!canPost" mdbBtn color="success" mdbWavesEffect (click)="postPost()">Post</button>
 
           <div class="dropdown-menu dropdown-primary">
             <button class="dropdown-item" href="#">
@@ -296,7 +302,7 @@
         <!-- <a href="" class="green-text">
           <h6 class="font-weight-bold mb-3"><mdb-icon fas icon="utensils" class="pr-2"></mdb-icon>Food</h6>
         </a> -->
-        <div class="dropdown" mdbDropdown>
+        <div  class="dropdown" mdbDropdown>
           <button
             mdbDropdownToggle
             mdbBtn
@@ -305,21 +311,21 @@
             type="button"
             mdbWavesEffect
           >
-            Category
+            {{categoryInput}}
           </button>
-          <a mdbBtn color="pink" mdbWavesEffect (click)="postPost()">Post</a>
+          <button [disabled]="!canPost" mdbBtn color="pink" mdbWavesEffect (click)="postPost()">Post</button>
 
           <div class="dropdown-menu dropdown-primary">
-            <button class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="setCategory('Food')">
               <i class="fas fa-utensils"></i>Food
             </button>
-            <button class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="setCategory('Travel')">
               <i class="fas fa-suitcase"></i>Travel
             </button>
-            <button class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="setCategory('Hangout')">
               <i class="fas fa-glass-cheers"></i>Hangout
             </button>
-            <button class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="setCategory('Poll')">
               <i class="fas fa-sort-amount-up"></i>Poll
             </button>
           </div>
