@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {readPost, User, writePost } from 'src/app/shared-module/models/user';
+import { readPost, User, writePost } from 'src/app/shared-module/models/user';
 import { LoginService } from 'src/app/services';
 import { Constants } from 'src/app/shared-module/constants/constants';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/core-module/services';
-import { isJSDocThisTag } from 'typescript';
 
 
 @Component({
@@ -17,7 +16,9 @@ export class RoomComponent implements OnInit {
   posts: readPost[] = [];
   titleInput: string = "";
   imageInput: string = "";
-  categoryInput: string = "Category";
+  categoryInputID: number = 0;
+  categoryInputName: string = "Category";
+  show: boolean = false;
 
   constructor(private loginService: LoginService, private toaster: ToasterService, private router: Router) {
     this.getPosts();
@@ -35,6 +36,7 @@ export class RoomComponent implements OnInit {
     );
   }
 
+
   isCurrentUser(index: number):boolean{
     let log = this.loginService.loggedIn();
 
@@ -44,6 +46,14 @@ export class RoomComponent implements OnInit {
       return this.posts[index].user.userID === JSON.parse(localStorage.getItem(Constants.session.user)).userID
     }
     return false;
+  }
+
+  get showCreation(): boolean{
+    return this.show;
+  }
+
+  toggleShowCreation(): void {
+    this.show = !this.show;
   }
 
   getUser(userID:number): void{
@@ -70,13 +80,15 @@ export class RoomComponent implements OnInit {
       message: this.messageInput,
       rating: 5,
       createdBy: this.loginService.loggedIn() === "session" ?  this.UserFromSessionStorage: this.UserFromLocalStorage,
-      createdDate: new Date()
+      createdDate: new Date(),
+      categoryID: this.categoryInputID
       }
       this.loginService.addPost(post).subscribe(
         (post:readPost)=>{
           for (let i = 0; i < this.posts.length; i++){
             if(post.rating > this.posts[i].rating){
               this.posts.splice(i,0, post);
+              this.posts[i].category = {categoryID: this.categoryInputID, name: this.categoryInputName}
               return;
             }
           }
@@ -114,7 +126,7 @@ export class RoomComponent implements OnInit {
   }
 
   get canPost(): boolean {
-    return this.messageInput.trim().length != 0 && this.titleInput.trim().length != 0 && this.categoryInput != "Category";
+    return this.messageInput.trim().length != 0 && this.titleInput.trim().length != 0 && this.categoryInputID != 0;
   }
 
 
@@ -170,7 +182,21 @@ export class RoomComponent implements OnInit {
     );
   }
 
-  setCategory(category: string): void {
-    this.categoryInput = category;
+  setCategory(category: number): void {
+    this.categoryInputID = category;
+    switch(category){
+      case 1:
+        this.categoryInputName = "Food";
+        break;
+      case 2:
+        this.categoryInputName = "Travel";
+        break;
+      case 3:
+        this.categoryInputName = "Hangout";
+        break;
+      case 4:
+        this.categoryInputName = "Poll";
+        break;
+    }
   }
 }

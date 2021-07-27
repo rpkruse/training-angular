@@ -17,6 +17,7 @@ export interface readPost{
   createdBy: number;
   user: User;
   createdDate: Date;
+  category: Category;
 }
 
 export interface writePost{
@@ -26,6 +27,11 @@ export interface writePost{
   createdBy: number;
   createdDate: Date;
   image: string;
+  categoryID: number;
 }
 
+export interface Category{
+  categoryID: number;
+  name: string;
+}
 
