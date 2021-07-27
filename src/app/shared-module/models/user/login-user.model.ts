@@ -9,18 +9,23 @@ export interface User {
 }
 
 export interface readPost{
+  title: string;
+  imageURL: string;
   postID: number;
   message: string;
   rating: number;
   createdBy: number;
   user: User;
+  createdDate: Date;
 }
 
 export interface writePost{
+  title: string;
   message: string;
   rating: number;
   createdBy: number;
   createdDate: Date;
+  image: string;
 }
 
 

@@ -11,6 +11,8 @@ import { LoginComponent, SignUpComponent } from './components';
 import { RoomSelectionComponent } from './components/room-selection/room-selection.component';
 import { RoomComponent } from './components/room/room.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { LoginService } from './services';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
