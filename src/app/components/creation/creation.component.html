@@ -1,0 +1,401 @@
+<div *ngIf="showCreation; else createButton">
+  <div *ngIf="postsLength % 2 == 0; else postRight">
+    <hr class="my-5" />
+
+    <!-- Grid row -->
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+          <img
+            class="img-fluid"
+            src="https://cdn.discordapp.com/attachments/168572195075915776/858518609424154654/masters.PNG"
+            alt="Sample image"
+          />
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            name="imagePink"
+            id="imagePink"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="imageInput"
+            mdbInput
+          />
+          <label for="imagePink">Image URL</label>
+        </div>
+      </div>
+
+      <!-- Grid column -->
+      <div class="col-lg-7">
+        <!-- Category -->
+        <h3 class="font-weight-bold mb-3">
+          <strong>Create Post</strong>
+        </h3>
+        <!-- Post title -->
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            id="form-lg"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="titleInput"
+            mdbInput
+          />
+          <label for="form-lg">Title</label>
+        </div>
+
+        <!-- Excerpt -->
+        <p></p>
+
+        <div class="md-form md-outline green-text">
+          <textarea
+            type="text"
+            id="form75"
+            class="form-control mb-3 md-textarea"
+            rows="2.5"
+            [(ngModel)]="messageInput"
+            mdbInput
+          ></textarea>
+          <label for="form75">Message</label>
+        </div>
+
+        <div class="dropdown" mdbDropdown>
+          <button
+            mdbDropdownToggle
+            mdbBtn
+            color="{{ findButtonColor(categoryInputID) }}"
+            class="dropdown-toggle waves-light"
+            type="button"
+            mdbWavesEffect
+          >
+            {{ categoryInputName }}
+          </button>
+          <button
+            [disabled]="!canPost"
+            mdbBtn
+            color="{{ findButtonColor(categoryInputID) }}"
+            mdbWavesEffect
+            (click)="postPost()"
+          >
+            Post
+          </button>
+
+          <div class="dropdown-menu dropdown-primary">
+            <button class="dropdown-item" (click)="setCategory(1)">
+              <i class="fas fa-utensils"></i>&nbsp; Food
+            </button>
+            <button class="dropdown-item" (click)="setCategory(2)">
+              <i class="fas fa-suitcase"></i>&nbsp; Travel
+            </button>
+            <button class="dropdown-item" (click)="setCategory(3)">
+              <i class="fas fa-glass-cheers"></i>&nbsp; Hangout
+            </button>
+            <button
+              class="dropdown-item"
+              (click)="setCategory(4); toggleShowCreation(); toggleShowPoll()"
+            >
+              <i class="fas fa-sort-amount-up"></i>&nbsp; Poll
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+    </div>
+    <button
+      (click)="toggleShowCreation()"
+      mdbBtn
+      type="button"
+      gradient="purple"
+      block="true"
+      size="lg"
+      mdbWavesEffect
+    >
+      Cancel
+    </button>
+  </div>
+
+  <ng-template #postRight>
+    <!-- Grid row -->
+
+    <hr class="my-5" />
+
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-lg-7">
+        <h3 class="font-weight-bold mb-3">
+          <strong>Create Post</strong>
+        </h3>
+        <!-- Category -->
+
+        <div
+          class="md-form md-outline form-lg font-weight-bold green-text mb-3"
+        >
+          <input
+            id="form-lg"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="titleInput"
+            mdbInput
+          />
+          <label for="form-lg">Title</label>
+        </div>
+
+        <div class="md-form md-outline pink-text">
+          <textarea
+            type="text"
+            id="form75"
+            class="form-control mb-3 md-textarea"
+            rows="2.5"
+            [(ngModel)]="messageInput"
+            mdbInput
+          ></textarea>
+          <label for="form75">Message</label>
+        </div>
+
+        <div class="dropdown" mdbDropdown>
+          <button
+            mdbDropdownToggle
+            mdbBtn
+            mdbBtn
+            color="{{ findButtonColor(categoryInputID) }}"
+            class="dropdown-toggle waves-light"
+            type="button"
+            mdbWavesEffect
+          >
+            {{ categoryInputName }}
+          </button>
+          <button
+            [disabled]="!canPost"
+            mdbBtn
+            mdbBtn
+            color="{{ findButtonColor(categoryInputID) }}"
+            mdbWavesEffect
+            (click)="postPost()"
+          >
+            Post
+          </button>
+
+          <div class="dropdown-menu dropdown-primary">
+            <button class="dropdown-item" (click)="setCategory(1)">
+              <i class="fas fa-utensils"></i>&nbsp; Food
+            </button>
+            <button class="dropdown-item" (click)="setCategory(2)">
+              <i class="fas fa-suitcase"></i>&nbsp; Travel
+            </button>
+            <button class="dropdown-item" (click)="setCategory(3)">
+              <i class="fas fa-glass-cheers"></i>&nbsp; Hangout
+            </button>
+            <button
+              class="dropdown-item"
+              (click)="setCategory(4); toggleShowCreation(); toggleShowPoll()"
+            >
+              <i class="fas fa-sort-amount-up"></i>&nbsp; Poll
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+
+      <div class="col-lg-5">
+        <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+          <img
+            class="img-fluid"
+            src="https://cdn.discordapp.com/attachments/168572195075915776/858518609424154654/masters.PNG"
+            alt="Sample image"
+          />
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+        <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+          <input
+            name="imagePink"
+            id="imagePink"
+            class="form-control form-control-lg"
+            type="text"
+            [(ngModel)]="imageInput"
+            mdbInput
+          />
+          <label for="imagePink">Image URL</label>
+        </div>
+      </div>
+
+      <!-- Grid column -->
+    </div>
+    <button
+      mdbBtn
+      type="button"
+      (click)="toggleShowCreation()"
+      gradient="purple"
+      block="true"
+      size="lg"
+      mdbWavesEffect
+    >
+      Cancel
+    </button>
+    <!-- Grid row -->
+  </ng-template>
+</div>
+<ng-template #createButton>
+  <div *ngIf="!showPollCreation; else cancelBlock">
+    <button
+      mdbBtn
+      type="button"
+      (click)="toggleShowCreation()"
+      gradient="purple"
+      block="true"
+      size="lg"
+      mdbWavesEffect
+    >
+      Create Post
+    </button>
+  </div>
+  <ng-template #cancelBlock>
+    <div>
+      <!-- Grid row -->
+
+      <hr class="my-5" />
+
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-lg-7">
+          <h3 class="font-weight-bold mb-3">
+            <strong>Create Straw Poll</strong>
+          </h3>
+          <!-- Category -->
+
+          <div
+            class="md-form md-outline form-lg font-weight-bold green-text mb-3"
+          >
+            <input
+              id="form-lg"
+              class="form-control form-control-lg"
+              type="text"
+              [(ngModel)]="question"
+              mdbInput
+            />
+            <label for="form-lg">Question</label>
+          </div>
+
+          <div
+            *ngFor="let ans of answerList; index as i; trackBy: trackByIndex"
+          >
+            <div class="md-form md-outline pink-text">
+              <input
+                class="form-control form-control-lg"
+                type="text"
+                [(ngModel)]="answerList[i]"
+                mdbInput
+              />
+              <label for="form-lge">Answer {{ i + 1 }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="dropdown" mdbDropdown style="margin-top: 50px">
+            <button
+              style="width: 250px"
+              mdbDropdownToggle
+              mdbBtn
+              mdbBtn
+              color="{{ findButtonColor(categoryInputID) }}"
+              class="dropdown-toggle waves-light"
+              type="button"
+              mdbWavesEffect
+            >
+              {{ categoryInputName }}
+            </button>
+
+            <div class="dropdown-menu dropdown-primary">
+              <button
+                class="dropdown-item"
+                (click)="setCategory(1); toggleShowPoll(); toggleShowCreation()"
+              >
+                <i class="fas fa-utensils"></i>&nbsp; Food
+              </button>
+              <button
+                class="dropdown-item"
+                (click)="setCategory(2); toggleShowPoll(); toggleShowCreation()"
+              >
+                <i class="fas fa-suitcase"></i>&nbsp; Travel
+              </button>
+              <button
+                class="dropdown-item"
+                (click)="setCategory(3); toggleShowPoll(); toggleShowCreation()"
+              >
+                <i class="fas fa-glass-cheers"></i>&nbsp; Hangout
+              </button>
+              <button class="dropdown-item" (click)="setCategory(4)">
+                <i class="fas fa-sort-amount-up"></i>&nbsp; Poll
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              style="width: 250px"
+              mdbBtn
+              color="{{ findButtonColor(categoryInputID) }}"
+              mdbWavesEffect
+              (click)="addAnswerChoice()"
+            >
+              Add Answer Choice
+            </button>
+            <button
+              [disabled]="!canDelete"
+              style="width: 250px"
+              mdbBtn
+              color="{{ findButtonColor(categoryInputID) }}"
+              mdbWavesEffect
+              (click)="deleteAnswerChoice()"
+            >
+              Remove Answer Choice
+            </button>
+            <button
+              style="width: 250px"
+              [disabled]="!canPostPoll"
+              mdbBtn
+              color="{{ findButtonColor(categoryInputID) }}"
+              mdbWavesEffect
+              (click)="postPoll()"
+            >
+              Post
+            </button>
+            <div>
+              <!-- Default inline 1-->
+              <mdb-checkbox [(ngModel)]="manyAnswers" [inline]="true"
+                >Select Many</mdb-checkbox
+              >
+
+              <!-- Default inline 2-->
+              <mdb-checkbox [(ngModel)]="anonymous" [inline]="true"
+                >Anonymous</mdb-checkbox
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid column -->
+      </div>
+
+      <button
+        mdbBtn
+        type="button"
+        (click)="toggleShowPoll(); setCategory(0)"
+        gradient="purple"
+        block="true"
+        size="lg"
+        mdbWavesEffect
+      >
+        Cancel
+      </button>
+    </div>
+  </ng-template>
+</ng-template>

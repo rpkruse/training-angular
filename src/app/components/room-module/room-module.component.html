@@ -1,0 +1,109 @@
+<div [@simpleFadeAnimation]="'in'">
+  <!--Grid row-->
+  <div class="row d-flex justify-content-center">
+    <!--Grid column-->
+    <div class="col-lg-6 col-xl-5 mb-3">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+        <img
+          src="{{ firstRoom.imageURL }}"
+          class="img-fluid"
+          alt="Sample project image"
+        />
+        <a>
+          <div
+            (click)="navigateToRoom(false)"
+            class="mask rgba-white-slight"
+          ></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <mdb-card-body>
+        <h4 class="font-weight-bold mt-2 mb-3">{{ firstRoom.roomName }}</h4>
+        <p>
+          {{ firstRoom.bio }}
+        </p>
+        <a
+          mdbBtn
+          color="success"
+          size="md"
+          rounded="true"
+          class="waves-light"
+          mdbWavesEffect
+          [routerLink]="['/room', firstRoom.roomID]"
+        >
+          View Bulletin</a
+        >
+        <a
+          mdbBtn
+          color="danger"
+          size="md"
+          rounded="true"
+          class="waves-light"
+          [@simpleFadeAnimation]="'in'"
+          (click)="removeUserFromRoom(firstRoom, false)"
+          mdbWavesEffect
+        >
+          Leave Group</a
+        >
+      </mdb-card-body>
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div *ngIf="!final" class="col-lg-6 col-xl-5 mb-3">
+      <!--Featured image-->
+      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+        <img
+          src="{{ secondRoom.imageURL }}"
+          class="img-fluid"
+          alt="Sample project image"
+        />
+        <a>
+          <div
+            (click)="navigateToRoom(true)"
+            class="mask rgba-white-slight"
+          ></div>
+        </a>
+      </div>
+
+      <!--Excerpt-->
+      <mdb-card-body>
+        <h4 class="font-weight-bold mt-2 mb-3">
+          {{ secondRoom.roomName }}
+        </h4>
+        <p>
+          {{ secondRoom.bio }}
+        </p>
+        <a
+          mdbBtn
+          color="success"
+          size="md"
+          rounded="true"
+          class="waves-light"
+          mdbWavesEffect
+          [routerLink]="['/room', secondRoom.roomID]"
+        >
+          View Bulletin</a
+        >
+        <a
+          mdbBtn
+          color="danger"
+          size="md"
+          rounded="true"
+          class="waves-light"
+          [@simpleFadeAnimation]="'in'"
+          (click)="removeUserFromRoom(secondRoom, true)"
+          mdbWavesEffect
+        >
+          Leave Group</a
+        >
+      </mdb-card-body>
+    </div>
+
+    <!--Grid column-->
+  </div>
+
+  <!--Grid row-->
+</div>

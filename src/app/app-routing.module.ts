@@ -1,13 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './auth.guard';
-import { LoginComponent, RoomSelectionComponent, SignUpComponent } from './components';
-import { RoomComponent } from './components/room/room.component';
-import { Constants } from './shared-module/constants/constants';
-
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "./auth.guard";
+import {
+  LoginComponent,
+  RoomSelectionComponent,
+  SignUpComponent,
+} from "./components";
+import { RoomComponent } from "./components/room/room.component";
+import { RoomAuthGuard } from "./room-auth.guard";
+import { Constants } from "./shared-module/constants/constants";
 
 const routes: Routes = [
-
   {
     path: Constants.uiRoutes.login,
     component: LoginComponent,
@@ -19,22 +22,21 @@ const routes: Routes = [
   {
     path: Constants.uiRoutes.room,
     component: RoomSelectionComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: Constants.uiRoutes.board,
+    path: `${Constants.uiRoutes.board}/:roomID`,
     component: RoomComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoomAuthGuard],
   },
   {
-    path: '**',
+    path: "**",
     redirectTo: Constants.uiRoutes.login,
-  }
-
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

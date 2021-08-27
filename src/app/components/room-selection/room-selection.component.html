@@ -1,185 +1,151 @@
 <!--Projects section v.2-->
+
 <section class="section text-center">
   <!--Section heading-->
   <h2 class="font-weight-bold h1 py-5">
     <strong>Your Bulletins</strong>
   </h2>
   <!--Section description-->
-  <!-- <p class="grey-text pb-5 text-center mx-xl-5 px-xl-5">
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p> -->
 
-  <!--Grid row-->
-  <div class="row d-flex justify-content-center">
-    <!--Grid column-->
-    <div class="col-lg-6 col-xl-5 mb-3">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
-        <img
-          src="https://mdbootstrap.com/img/Photos/Others/laptop-sm.jpg"
-          class="img-fluid"
-          alt="Sample project image"
-        />
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
+  <div
+    *ngFor="let room of rooms; even as even; last as final; index as i"
+    [@simpleFadeAnimation]="'in'"
+  >
+    <div *ngIf="even">
+      <div *ngIf="final; else finalBlock">
+        <app-room-module
+          (removedIndex)="removed($event)"
+          [final]="final"
+          [index]="i"
+          [firstRoom]="this.rooms[i]"
+          [secondRoom]="null"
+        ></app-room-module>
       </div>
-
-      <!--Excerpt-->
-      <mdb-card-body>
-        <a href="" class="green-text">
-          <h5 class="font-weight-bold mt-2 mb-3">
-            <mdb-icon fas icon="chart-line"></mdb-icon> Marketing
-          </h5>
-        </a>
-        <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
-        <p>
-          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-          consectetur, adipisci velit, sed quia non numquam.
-        </p>
-        <a
-          mdbBtn
-          color="success"
-          size="md"
-          rounded="true"
-          class="waves-light"
-          mdbWavesEffect
-        >
-          View more</a
-        >
-      </mdb-card-body>
+      <ng-template #finalBlock>
+        <app-room-module
+          [final]="final"
+          (removedIndex)="removed($event)"
+          [index]="i"
+          [firstRoom]="this.rooms[i]"
+          [secondRoom]="this.rooms[i + 1]"
+        ></app-room-module>
+      </ng-template>
     </div>
-    <!--Grid column-->
-
-    <!--Grid column-->
-    <div class="col-lg-6 col-xl-5 mb-3">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
-        <img
-          src="https://mdbootstrap.com/img/Photos/Others/images/19.jpg"
-          class="img-fluid"
-          alt="Sample project image"
-        />
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-      <!--Excerpt-->
-      <mdb-card-body>
-        <a href="" class="blue-text">
-          <h5 class="font-weight-bold mt-2 mb-3">
-            <mdb-icon far icon="eye"></mdb-icon> Entertainment
-          </h5>
-        </a>
-        <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
-        <p>
-          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-          suscipit laboriosam nisi ut aliquid.
-        </p>
-        <a
-          mdbBtn
-          color="success"
-          size="md"
-          rounded="true"
-          class="waves-light"
-          mdbWavesEffect
-        >
-          View more</a
-        >
-      </mdb-card-body>
-    </div>
-    <!--Grid column-->
   </div>
-  <!--Grid row-->
-
-  <!--Grid row-->
-  <div class="row d-flex justify-content-center">
-    <!--Grid column-->
-    <div class="col-lg-6 col-xl-5 mb-3">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
-        <img
-          src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg"
-          class="img-fluid"
-          alt="Sample project image"
-        />
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-      <!--Excerpt-->
-      <mdb-card-body>
-        <a href="" class="brown-text">
-          <h5 class="font-weight-bold mt-2 mb-3">
-            <mdb-icon fas icon="camera"></mdb-icon> Travel
-          </h5>
-        </a>
-        <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
-        <p>
-          Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-          consectetur, adipisci velit, sed quia non numquam.
-        </p>
-        <a
-          mdbBtn
-          color="success"
-          size="md"
-          rounded="true"
-          class="waves-light"
-          mdbWavesEffect
-        >
-          View more</a
-        >
-      </mdb-card-body>
-    </div>
-    <!--Grid column-->
-
-    <!--Grid column-->
-    <div class="col-lg-6 col-xl-5 mb-3">
-      <!--Featured image-->
-      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
-        <img
-          src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/img (56).jpg"
-          class="img-fluid"
-          alt="Sample project image"
-        />
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-      <!--Excerpt-->
-      <mdb-card-body>
-        <a href="" class="cyan-text">
-          <h5 class="font-weight-bold mt-2 mb-3">
-            <mdb-icon fas icon="phone"></mdb-icon> Technology
-          </h5>
-        </a>
-        <h4 class="font-weight-bold mt-2 mb-3">This is title of the news</h4>
-        <p>
-          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-          suscipit laboriosam nisi ut aliquid.
-        </p>
-        <a
-          mdbBtn
-          color="success"
-          size="md"
-          rounded="true"
-          class="waves-light"
-          mdbWavesEffect
-        >
-          View more</a
-        >
-      </mdb-card-body>
-    </div>
-    <!--Grid column-->
-  </div>
-  <!--Grid row-->
 </section>
 <!--/Projects section v.2-->
+<div *ngIf="show == true; else createBlock">
+  <button
+    mdbBtn
+    type="button"
+    gradient="purple"
+    block="true"
+    size="lg"
+    mdbWavesEffect
+    (click)="toggleShow()"
+  >
+    Create Bulletin
+  </button>
+</div>
 
+<ng-template #createBlock>
+  <div class="row">
+    <!-- Grid column -->
+    <div class="col-lg-7">
+      <h3 class="font-weight-bold mb-3">
+        <strong>Create Room</strong>
+      </h3>
+      <!-- Category -->
 
-<button mdbBtn type="button" gradient="purple" block="true" size="lg" mdbWavesEffect>Create Bulletin</button>
+      <div class="md-form md-outline form-lg font-weight-bold green-text mb-3">
+        <input
+          id="form-lg"
+          class="form-control form-control-lg"
+          type="text"
+          [(ngModel)]="roomNameInput"
+          mdbInput
+        />
+        <label for="form-lg">Room Name</label>
+      </div>
+
+      <div class="md-form md-outline form-lg font-weight-bold green-text mb-3">
+        <input
+          id="form-lp"
+          class="form-control form-control-lg"
+          type="text"
+          [(ngModel)]="passwordInput"
+          mdbInput
+        />
+        <label for="form-lp">Password</label>
+      </div>
+
+      <div class="md-form md-outline pink-text">
+        <textarea
+          type="text"
+          id="form75"
+          class="form-control mb-3 md-textarea"
+          rows="2.5"
+          [(ngModel)]="bioInput"
+          mdbInput
+        ></textarea>
+        <label for="form75">Bio</label>
+      </div>
+
+      <button
+        mdbBtn
+        type="button"
+        gradient="purple"
+        block="true"
+        size="lg"
+        mdbWavesEffect
+        (click)="postRoom()"
+        [disabled]="!canMakeRoom"
+      >
+        Create Room
+      </button>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+
+    <div class="col-lg-5">
+      <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+        <img
+          class="img-fluid"
+          src="https://cdn.discordapp.com/attachments/168572195075915776/858518609424154654/masters.PNG"
+          alt="Sample image"
+        />
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      <div class="md-form md-outline form-lg font-weight-bold pink-text mb-3">
+        <input
+          name="imagePink"
+          id="imagePink"
+          class="form-control form-control-lg"
+          type="text"
+          [(ngModel)]="imageURLInput"
+          mdbInput
+        />
+        <label for="imagePink">Image URL</label>
+      </div>
+
+      <button
+        mdbBtn
+        type="button"
+        color="danger"
+        block="true"
+        size="lg"
+        mdbWavesEffect
+        (click)="toggleShow()"
+      >
+        Cancel
+      </button>
+    </div>
+
+    <!-- Grid column -->
+  </div>
+</ng-template>
