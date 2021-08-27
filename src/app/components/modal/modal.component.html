@@ -1,0 +1,124 @@
+<button
+  mdbBtn
+  color="{{ findButtonColor(post.category.categoryID) }}"
+  data-toggle="modal"
+  data-target="#basicExample"
+  (click)="
+    setSeparateInputs(
+      post.title,
+      post.message,
+      post.image,
+      post.category.categoryID
+    );
+    frame.show()
+  "
+  mdbWavesEffect
+>
+  Update
+</button>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Post Editor</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+          <input
+            type="text"
+            class="form-control"
+            mdbInput
+            [(ngModel)]="separateTitleInput"
+          />
+          <label for="title">Title</label>
+        </div>
+        <div class="md-form mb-5">
+          <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+          <textarea
+            type="text"
+            id="form8"
+            class="md-textarea form-control"
+            rows="2"
+            mdbInput
+            mdbValidate
+            [(ngModel)]="separateMessageInput"
+          ></textarea>
+
+          <label for="orangeForme-email">Message</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="separateImageURL"
+            mdbInput
+          />
+          <label for="orangeFormw-pass">Image URL</label>
+        </div>
+
+        <div class="dropdown" mdbDropdown>
+          <button
+            mdbDropdownToggle
+            mdbBtn
+            color="{{ findButtonColor(separateCategoryInputID) }}"
+            class="dropdown-toggle waves-light"
+            type="button"
+            block="true"
+            mdbWavesEffect
+          >
+            {{ separateCategoryInputName }}
+          </button>
+
+          <div class="dropdown-menu dropdown-primary">
+            <button class="dropdown-item" (click)="setSeparateCategory(1)">
+              <i class="fas fa-utensils"></i>&nbsp; Food
+            </button>
+            <button class="dropdown-item" (click)="setSeparateCategory(2)">
+              <i class="fas fa-suitcase"></i>&nbsp; Travel
+            </button>
+            <button class="dropdown-item" (click)="setSeparateCategory(3)">
+              <i class="fas fa-glass-cheers"></i>&nbsp; Hangout
+            </button>
+            <!-- <button class="dropdown-item" (click)="setSeparateCategory(4)">
+              <i class="fas fa-sort-amount-up"></i>&nbsp; Poll
+            </button> -->
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button
+            [disabled]="!canUpdate"
+            mdbBtn
+            gradient="purple"
+            class="waves-light"
+            (click)="update(i); frame.hide()"
+            mdbWavesEffect
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

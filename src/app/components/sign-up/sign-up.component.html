@@ -51,9 +51,6 @@
   <ng-template #elseBlockk>
     <small class="form-text text-muted mb-4">Passwords match &#x2713;</small>
   </ng-template>
-
-  <!-- id="defaultRegisterFormEmail"  id="defaultRegisterFormPassword   id="defaultRegisterFormPassword"-->
-
   <!-- Sign up button -->
   <button
     mdbBtn
@@ -68,7 +65,9 @@
   </button>
 
   <!-- Social register -->
-  <p>or sign up with:</p>
+  <div>
+    <a href="" [routerLink]="['/login']">Have an account?</a>
+  </div>
 
   <a type="button" class="light-blue-text mx-2">
     <mdb-icon fab icon="facebook"></mdb-icon>

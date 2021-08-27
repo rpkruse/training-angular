@@ -1,0 +1,244 @@
+<div *ngIf="isPoll; else postblock">
+  <hr class="my-5" />
+  <iframe
+    width="620"
+    height="444"
+    [src]="pollID | safeHTML"
+    style="width: 100%; height: 444px"
+    frameborder="0"
+    allowfullscreen
+  ></iframe>
+
+  <h3
+    style="text-align: center; margin-top: 25px"
+    class="font-weight-bold mb-3"
+  >
+    <strong>{{ post.rating }}&nbsp; </strong>
+    <button
+      mdbBtn
+      color="{{ findButtonColor(post.category.categoryID) }}"
+      (click)="upvote(index)"
+      mdbWavesEffect
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <button
+      mdbBtn
+      color="{{ findButtonColor(post.category.categoryID) }}"
+      (click)="downvote(index)"
+      mdbWavesEffect
+    >
+      <i class="fas fa-arrow-down"></i>
+    </button>
+    <span *ngIf="isCurrentUser(index)">
+      <button
+        mdbBtn
+        color="{{ findButtonColor(post.category.categoryID) }}"
+        [@simpleFadeAnimation]="'leave'"
+        (click)="deletePost(post.postID, index)"
+        mdbWavesEffect
+      >
+        Delete
+      </button>
+    </span>
+  </h3>
+</div>
+<ng-template #postblock>
+  <div
+    #postblock
+    *ngIf="index % 2 == 0; else elseblock"
+    [@simpleFadeAnimation]="'in'"
+  >
+    <hr class="my-5" />
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-lg-5">
+        <!-- Featured image -->
+        <div
+          class="view overlay rounded z-depth-2 mb-lg-0 mb-4 waves-light"
+          mdbWavesEffect
+        >
+          <img class="img-fluid" src="{{ post.image }}" alt="Sample image" />
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+      </div>
+      <!-- Grid column -->
+      <div class="col-lg-7">
+        <!-- Category -->
+        <a
+          [ngClass]="{
+            'orange-text': post.category.categoryID == 2,
+            'green-text': post.category.categoryID == 1,
+            'blue-text': post.category.categoryID == 4,
+            'pink-text': post.category.categoryID == 3
+          }"
+        >
+          <h6 class="font-weight-bold mb-3">
+            <i
+              [ngClass]="{
+                'fa-sort-amount-up': post.category.categoryID == 2,
+                'fa-utensils': post.category.categoryID == 1,
+                'fa-suitcase': post.category.categoryID == 4,
+                'fa-glass-cheers': post.category.categoryID == 3
+              }"
+              class="fas"
+            ></i>
+            &nbsp; {{ post.category.name }}
+          </h6>
+        </a>
+        <!-- Post title -->
+        <h3 class="font-weight-bold mb-3">
+          <strong>{{ post.title }}</strong>
+        </h3>
+        <!-- Excerpt -->
+        <p>{{ post.message }}</p>
+        <!-- Post data -->
+        <p>
+          by
+          <a
+            ><strong>{{ post.user.username }}</strong></a
+          >, {{ timePosted(post.createdDate) }}
+        </p>
+
+        <!-- Read more button -->
+        <h3 class="font-weight-bold mb-3">
+          <strong>{{ post.rating }}&nbsp; </strong>
+          <button
+            mdbBtn
+            color="{{ findButtonColor(post.category.categoryID) }}"
+            (click)="upvote(index)"
+            mdbWavesEffect
+          >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button
+            mdbBtn
+            color="{{ findButtonColor(post.category.categoryID) }}"
+            (click)="downvote(index)"
+            mdbWavesEffect
+          >
+            <i class="fas fa-arrow-down"></i>
+          </button>
+          <span *ngIf="isCurrentUser(index)">
+            <button
+              mdbBtn
+              color="{{ findButtonColor(post.category.categoryID) }}"
+              [@simpleFadeAnimation]="'leave'"
+              (click)="deletePost(post.postID, index)"
+              mdbWavesEffect
+            >
+              Delete
+            </button>
+
+            <app-modal
+              (updated)="updated($event)"
+              [post]="post"
+              [index]="index"
+            ></app-modal>
+          </span>
+        </h3>
+      </div>
+      <!-- Grid column -->
+    </div>
+  </div>
+
+  <ng-template #elseblock>
+    <hr class="my-5" />
+
+    <!-- Grid row -->
+    <div class="row">
+      <!-- Grid column -->
+      <div class="col-lg-7">
+        <!-- Category -->
+        <a
+          [ngClass]="{
+            'orange-text': post.category.categoryID == 2,
+            'green-text': post.category.categoryID == 1,
+            'blue-text': post.category.categoryID == 4,
+            'pink-text': post.category.categoryID == 3
+          }"
+        >
+          <h6 class="font-weight-bold mb-3">
+            <i
+              [ngClass]="{
+                'fa-sort-amount-up': post.category.categoryID == 2,
+                'fa-utensils': post.category.categoryID == 1,
+                'fa-suitcase': post.category.categoryID == 4,
+                'fa-glass-cheers': post.category.categoryID == 3
+              }"
+              class="fa-suitcase fas"
+            ></i>
+            &nbsp; {{ post.category.name }}
+          </h6>
+        </a>
+        <!-- Post title -->
+        <h3 class="font-weight-bold mb-3">
+          <strong>{{ post.title }}</strong>
+        </h3>
+        <!-- Excerpt -->
+        <p>{{ post.message }}</p>
+        <!-- Post data -->
+        <p>
+          by
+          <a
+            ><strong>{{ post.user.username }}</strong></a
+          >, {{ timePosted(post.createdDate) }}
+        </p>
+        <!-- Read more button -->
+        <h3 class="font-weight-bold mb-3">
+          <strong> {{ post.rating }} &nbsp;</strong>
+
+          <button
+            mdbBtn
+            color="{{ findButtonColor(post.category.categoryID) }}"
+            (click)="upvote(index)"
+            mdbWavesEffect
+          >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+          <button
+            mdbBtn
+            color="{{ findButtonColor(post.category.categoryID) }}"
+            (click)="downvote(index)"
+            mdbWavesEffect
+          >
+            <i class="fas fa-arrow-down"></i>
+          </button>
+          <span *ngIf="isCurrentUser(index)">
+            <button
+              mdbBtn
+              color="{{ findButtonColor(post.category.categoryID) }}"
+              (click)="deletePost(post.postID, index)"
+              mdbWavesEffect
+            >
+              Delete
+            </button>
+
+            <app-modal [post]="post" [index]="index"></app-modal>
+          </span>
+        </h3>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-lg-5">
+        <!-- Featured image -->
+        <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+          <img
+            class="img-fluid"
+            src="{{ post.image }}"
+            alt="Ayo this image is broken"
+          />
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+      </div>
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+  </ng-template>
+</ng-template>

@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:5001'
+  baseUrl: 'https://localhost:5001',
+  strawpollUrl: `/poll/`,
+  strawpollDeleteUrl: `/content/delete/`,
+  strawpollKey: 'C3C5S4SYAWR83BKV8CC94J4X6QU3OKRF'
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

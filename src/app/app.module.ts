@@ -13,6 +13,12 @@ import { RoomComponent } from './components/room/room.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { LoginService } from './services';
 import { AuthGuard } from './auth.guard';
+import { PostComponent } from './components/post/post.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { CreationComponent } from './components/creation/creation.component';
+import { RoomModuleComponent } from './components/room-module/room-module.component';
+import { UpdateRoomComponent } from './components/update-room/update-room.component';
+import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import { AuthGuard } from './auth.guard';
     LoginComponent,
     SignUpComponent,
     RoomSelectionComponent,
-    RoomComponent
+    RoomComponent,
+    PostComponent,
+    ModalComponent,
+    CreationComponent,
+    RoomModuleComponent,
+    UpdateRoomComponent,
+    SafeHTMLPipe
   ],
   imports: [
     BrowserModule,

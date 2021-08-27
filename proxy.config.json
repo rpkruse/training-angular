@@ -1,0 +1,16 @@
+{
+  "/poll": {
+      "target": "https://strawpoll.com/api",
+      "secure": true,
+      "logLevel": "info",
+      "changeOrigin": true
+  },
+  "/content/delete": {
+    "target": "https://strawpoll.com/api/content/delete",
+    "secure": true,
+    "logLevel": "info",
+    "changeOrigin": true
+}
+}
+
+
