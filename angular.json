@@ -89,7 +89,6 @@
               "browserTarget": "training-angular:build:production"
             }
           }
-
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -138,6 +137,10 @@
               "devServerTarget": "training-angular:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
