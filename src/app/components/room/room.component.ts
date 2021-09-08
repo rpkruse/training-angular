@@ -294,9 +294,12 @@ export class RoomComponent implements OnInit, OnDestroy {
 
   upvote(index: number): void {
     this.posts[index].rating += 1;
+    let currUser = this.loginService.loggedIn() === "session"
+            ? this.UserFromSessionStorage
+            : this.UserFromLocalStorage
 
     this.loginService
-      .upvotePost(this.posts[index], this.UserFromSessionStorage)
+      .upvotePost(this.posts[index], currUser)
       .subscribe(
         () => {
           this.posts.sort((a, b) => (a.rating < b.rating ? 1 : -1));
@@ -330,8 +333,11 @@ export class RoomComponent implements OnInit, OnDestroy {
 
   downvote(index: number): void {
     this.posts[index].rating -= 1;
+    let currUser = this.loginService.loggedIn() === "session"
+            ? this.UserFromSessionStorage
+            : this.UserFromLocalStorage
     this.loginService
-      .downvotePost(this.posts[index], this.UserFromSessionStorage)
+      .downvotePost(this.posts[index], currUser)
       .subscribe(
         () => {
           this.posts.sort((a, b) => (a.rating < b.rating ? 1 : -1));

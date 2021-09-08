@@ -47,6 +47,7 @@ export class RoomSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRooms();
+    this.imageURLInput = this.findImageURL;
   }
 
   getRooms(): void {

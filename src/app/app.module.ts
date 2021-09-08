@@ -19,6 +19,9 @@ import { CreationComponent } from './components/creation/creation.component';
 import { RoomModuleComponent } from './components/room-module/room-module.component';
 import { UpdateRoomComponent } from './components/update-room/update-room.component';
 import { SafeHTMLPipe } from './pipes/safe-html.pipe';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,12 @@ import { SafeHTMLPipe } from './pipes/safe-html.pipe';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgProgressModule.withConfig({
+      spinnerPosition: "left",
+      color: "#f71cff"
+    }),
+    NgProgressHttpModule
   ],
   providers: [LoginService, AuthGuard],
   bootstrap: [AppComponent]

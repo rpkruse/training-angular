@@ -53,8 +53,9 @@ export class AppComponent implements OnInit {
   }
   get showNavbar(): boolean {
     return (
+      // this.currentRoute.includes(`/${Constants.uiRoutes.board}/`) || this.currentRoute.includes(`/${Constants.uiRoutes.room}/`)
       this.currentRoute !== `/${Constants.uiRoutes.login}` &&
-      this.currentRoute !== `/${Constants.uiRoutes.signup}`
+      this.currentRoute !== `/${Constants.uiRoutes.signup}` && this.userFromStorage!==""
     );
   }
 
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit {
       this.currentRoute.includes(`/${Constants.uiRoutes.board}/`)
     );
   }
-  title = "training-angular";
+  title = "BulletinBuddy";
   logout(): void {
     sessionStorage.removeItem(Constants.session.user);
     localStorage.removeItem(Constants.session.user);
@@ -119,6 +120,7 @@ export class AppComponent implements OnInit {
     return output;
   }
 
+
   loginToRoom(roomName: string, password: string) {
     this.loginService.loginToRoom(roomName, password).subscribe(
       (room: Room) => {
@@ -127,8 +129,10 @@ export class AppComponent implements OnInit {
       },
       (err) => this.handleError(err.error.error[0]),
       () => {
-        this.router.navigate([Constants.uiRoutes.board, this.room.roomID]);
+
         //console.log(this.room);
+        this.router.navigate([Constants.uiRoutes.board, this.room.roomID]);
+        this.loginService.emitNewRoom(this.room);
       }
     );
   }
