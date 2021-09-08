@@ -57,7 +57,9 @@ export class CreationComponent implements OnInit {
     private toaster: ToasterService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.imageInput = this.findImageURL;
+  }
 
   toggleShowCreation(): void {
     this.show = !this.show;
